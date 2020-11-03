@@ -1,0 +1,15 @@
+.header {
+  max-width: 100vw;
+  width: 100%;
+  background: #01052b;
+  grid-area: h;
+}
+.header_inner {
+}
+.logo {
+  padding: 15px 0 15px 20px;
+}
+.logo img {
+  max-width: 40px;
+  display: block;
+}
