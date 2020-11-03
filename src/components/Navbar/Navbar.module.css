@@ -1,14 +1,25 @@
 .navbar {
   grid-area: n;
 }
+.navbar nav {
+  padding: 20px 0 0;
+}
 .navbar ul {
   margin: 0;
   padding: 0;
+  text-align: left;
 }
 .navbar li {
   list-style: none;
+  /* margin-bottom: 5px; */
 }
 .navbar a {
   text-decoration: none;
-  color: #000;
+  color: #fff;
+  display: block;
+  width: 100%;
+  padding: 5px;
+}
+.navbar a:hover {
+  background: rgba(0, 0, 0, 0.3);
 }

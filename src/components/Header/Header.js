@@ -6,7 +6,9 @@ const Header = () => {
     <header className={s.header}>
       <div className={s.header_inner}>
         <div className={s.logo}>
-          <img src="./../img/logo.jpg" alt=""></img>
+          <a href="#">
+            <img src="./../img/logo.jpg" alt=""></img>
+          </a>
         </div>
       </div>
     </header>
