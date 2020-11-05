@@ -1,12 +1,20 @@
+* {
+    box-sizing: border-box;
+}
 .app-wrapper {
-  max-width: 1170px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 15px;
-  display: grid;
-  grid-template-columns: 2fr 10fr;
-  grid-template-rows: 70px 1fr;
-  grid-template-areas:
-    "h h"
-    "n p";
+    max-width: 1170px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    grid-template-rows: 70px 1fr;
+    grid-template-areas:
+        "h h"
+        "n c";
+}
+.app-wrapper-content {
+    padding: 20px;
+    grid-area: c;
+    background: rgba(0, 0, 0, 0.3);
 }
