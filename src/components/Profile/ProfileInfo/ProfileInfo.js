@@ -5,10 +5,10 @@ import s from "../ProfileInfo/ProfileInfo.module.css";
 const ProfileInfo = (props) => {
     return (
         <div className={s.profile_info}>
-            <div className={s.profile_info_img}>
+            <div className={s.head_img}>
                 <img src="../img/user-img.jpg"></img>
             </div>
-            <div>ava+desc</div>
+            <div className={s.content}>ava+desc</div>
         </div>
     );
 };

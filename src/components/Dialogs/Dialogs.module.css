@@ -1,14 +1,29 @@
 .dialogs {
     display: flex;
-    background: #dedede;
-    padding: 20px 20px 300px 20px;
 }
 .dialogs_items {
-    padding-left: 20px;
+    background: #fff;
+    max-width: 280px;
+    width: 100%;
+    border-right: 2px solid gray;
 }
 .dialog {
     margin-bottom: 10px;
 }
 .messages {
-    padding-left: 100px;
+    padding-left: 30px;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    width: 100%;
+    overflow: hidden;
+    justify-content: flex-end;
+    min-height: calc(100vh - 68px);
+}
+.title {
+    font-size: 20px;
+    color: #000;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    text-align: center;
 }

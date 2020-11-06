@@ -1,0 +1,17 @@
+.wrapper {
+    border-bottom: 2px solid gray;
+}
+.dialog_item_link {
+    text-decoration: none;
+    color: #000;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+}
+.dialog_photo img {
+    max-width: 40px;
+    border-radius: 50%;
+}
+.dialog_name {
+    margin-left: 20px;
+}

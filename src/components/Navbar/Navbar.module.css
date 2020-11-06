@@ -1,8 +1,14 @@
 .navbar {
     grid-area: n;
+    background: #3f4149;
+    max-width: 230px;
+    width: 100%;
+    /* min-height: calc(100vh - 70px); */
+
+    /* #363940 */
 }
 .navbar nav {
-    padding: 20px 0 0;
+    padding: 20px 20px 0 20px;
 }
 .navbar ul {
     margin: 0;
@@ -11,7 +17,7 @@
 }
 .navbar li {
     list-style: none;
-    /* margin-bottom: 5px; */
+    margin-bottom: 5px;
 }
 .navbar a {
     text-decoration: none;
@@ -24,5 +30,5 @@
     background: rgba(0, 0, 0, 0.3);
 }
 .navbar a.active {
-    color: #000;
+    color: #ec4d3b;
 }
