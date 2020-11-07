@@ -1,0 +1,32 @@
+.friends_wrapper {
+    margin-top: 200px;
+}
+.friends_title {
+    text-align: center;
+}
+.friends_title_link {
+    text-decoration: none;
+    color: #000;
+    font-size: 20px;
+}
+.topfriends ul {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+    margin: 20px 0 0;
+}
+.topfriends li {
+    list-style: none;
+}
+.topfriends a {
+    text-decoration: none;
+    color: #000;
+}
+.friend_name {
+    margin-top: 10px;
+    text-align: center;
+}
+.friend_img img {
+    max-width: 50px;
+    border-radius: 50%;
+}

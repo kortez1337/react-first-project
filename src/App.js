@@ -17,7 +17,7 @@ const App = (props) => {
                 <div className="main">
                     <div className="container">
                         <div className="main_inner">
-                            <Navbar />
+                            <Navbar state={props.state.sitebar} />
                             <div className="app-wrapper-content">
                                 <Route
                                     path="/profile"
@@ -25,6 +25,10 @@ const App = (props) => {
                                         return (
                                             <Profile
                                                 state={props.state.profilePage}
+                                                addPost={props.addPost}
+                                                updateNewPostText={
+                                                    props.updateNewPostText
+                                                }
                                             />
                                         );
                                     }}
@@ -35,6 +39,10 @@ const App = (props) => {
                                         return (
                                             <Dialogs
                                                 state={props.state.dialogsPage}
+                                                addMessage={props.addMessage}
+                                                updateMessageText={
+                                                    props.updateMessageText
+                                                }
                                             />
                                         );
                                     }}

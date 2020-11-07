@@ -1,4 +1,4 @@
-.navbar {
+.navbar_wrapper {
     grid-area: n;
     background: #3f4149;
     max-width: 230px;
