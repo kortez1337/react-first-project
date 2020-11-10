@@ -17,7 +17,7 @@ const App = (props) => {
                 <div className="main">
                     <div className="container">
                         <div className="main_inner">
-                            <Navbar state={props.state.sitebar} />
+                            <Navbar state={props.state.sidebar} />
                             <div className="app-wrapper-content">
                                 <Route
                                     path="/profile"
@@ -25,10 +25,7 @@ const App = (props) => {
                                         return (
                                             <Profile
                                                 state={props.state.profilePage}
-                                                addPost={props.addPost}
-                                                updateNewPostText={
-                                                    props.updateNewPostText
-                                                }
+                                                dispatch={props.dispatch}
                                             />
                                         );
                                     }}
@@ -39,10 +36,7 @@ const App = (props) => {
                                         return (
                                             <Dialogs
                                                 state={props.state.dialogsPage}
-                                                addMessage={props.addMessage}
-                                                updateMessageText={
-                                                    props.updateMessageText
-                                                }
+                                                dispatch={props.dispatch}
                                             />
                                         );
                                     }}
