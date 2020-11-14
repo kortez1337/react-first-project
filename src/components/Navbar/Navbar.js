@@ -37,7 +37,8 @@ const Navbar = (props) => {
                     </ul>
                 </nav>
             </div>
-            <Friends friends={props.state.friends}></Friends>
+
+            <Friends friends={props.store.getState().sidebar.friends} />
         </div>
     );
 };
