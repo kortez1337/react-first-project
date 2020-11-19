@@ -1,0 +1,62 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 50px 20px 0;
+    position: relative;
+}
+.user_wrapper {
+    display: flex;
+    justify-content: space-between;
+    background: #dedede;
+    margin-bottom: 10px;
+    padding: 20px;
+}
+.photo img {
+    max-width: 90px;
+    width: 100%;
+    border-radius: 50%;
+}
+.right_side {
+    display: flex;
+    max-width: 80%;
+    width: 100%;
+    justify-content: space-between;
+}
+.status {
+    opacity: 0.6;
+}
+.name_status {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.left_side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.follow_btn {
+    margin-top: 20px;
+}
+.follow_btn button {
+    min-height: 30px;
+    max-width: 100px;
+    width: 100%;
+    padding: 0;
+    cursor: pointer;
+}
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    max-width: 200px;
+    width: 100%;
+    margin: 0 auto 30px auto;
+}
+.pagination_item {
+    background: #dedede;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.pagination_item__active {
+    background: red;
+}

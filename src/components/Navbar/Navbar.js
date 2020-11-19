@@ -11,12 +11,17 @@ const Navbar = (props) => {
                     <ul>
                         <li>
                             <NavLink to="/profile" activeClassName={s.active}>
-                                Моя страница
+                                Профиль
                             </NavLink>
                         </li>
                         <li>
                             <NavLink to="/dialogs" activeClassName={s.active}>
                                 Диалоги
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/users" activeClassName={s.active}>
+                                Пользователи
                             </NavLink>
                         </li>
                         <li>
@@ -38,7 +43,7 @@ const Navbar = (props) => {
                 </nav>
             </div>
 
-            <Friends friends={props.store.getState().sidebar.friends} />
+            <Friends />
         </div>
     );
 };

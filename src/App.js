@@ -2,12 +2,13 @@ import React from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import Profile from "./components/Profile/Profile";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import { BrowserRouter, Route } from "react-router-dom";
+import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 const App = (props) => {
     return (
@@ -17,18 +18,24 @@ const App = (props) => {
                 <div className="main">
                     <div className="container">
                         <div className="main_inner">
-                            <Navbar store={props.store} />
+                            <Navbar />
                             <div className="app-wrapper-content">
                                 <Route
-                                    path="/profile"
+                                    path="/profile/:userId?"
                                     render={() => {
-                                        return <Profile />;
+                                        return <ProfileContainer />;
                                     }}
                                 />
                                 <Route
                                     path="/dialogs"
                                     render={() => {
                                         return <DialogsContainer />;
+                                    }}
+                                />
+                                <Route
+                                    path="/users"
+                                    render={() => {
+                                        return <UsersContainer />;
                                     }}
                                 />
                                 <Route path="/news" component={News} />

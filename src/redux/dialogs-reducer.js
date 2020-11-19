@@ -3,9 +3,9 @@ const UPDATE_MESSAGE_TEXT = "UPDATE-MESSAGE-TEXT";
 
 let initialState = {
     dialogs: [
-        { id: 1, name: "Андрей", img: "img/andrey.jpg" },
-        { id: 2, name: "Гига", img: "img/giga.jpg" },
-        { id: 3, name: "Дима", img: "img/dima.jpg" },
+        { id: 1, name: "Андрей", img: "../assets/img/andrey.jpg" },
+        { id: 2, name: "Гига", img: "giga.jpg" },
+        { id: 3, name: "Дима", img: "../../../../../../assets/img/dima.jpg" },
         { id: 4, name: "Славик", img: "img/andrey.jpg" },
         { id: 5, name: "Макс", img: "img/dima.jpg" },
         { id: 6, name: "Паша", img: "img/pasha.jpg" },
