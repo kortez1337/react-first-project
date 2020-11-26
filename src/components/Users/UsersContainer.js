@@ -1,42 +1,27 @@
-import * as axios from "axios";
 import React from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import {
     changePage,
-    setTotalUsersCount,
-    setUsers,
     toggleFollow,
-    toggleLoader,
+    getUsers,
+    follow,
+    unfollow,
 } from "../../redux/users-reducer";
 import Preloader from "../common/Preloader/Preloader";
 import Users from "../Users/Users";
 
 class UsersAPIContainer extends React.Component {
     componentDidMount = () => {
-        this.props.toggleLoader(true);
-        axios
-            .get(
-                `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-            )
-            .then((response) => {
-                this.props.toggleLoader(false);
-                this.props.setUsers(response.data.items);
-                this.props.setTotalUsersCount(response.data.totalCount);
-            });
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
     };
 
     onPageChanged = (pageNumber) => {
         this.props.changePage(pageNumber);
-        this.props.toggleLoader(true);
-        axios
-            .get(
-                `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`
-            )
-            .then((response) => {
-                this.props.toggleLoader(false);
-                this.props.setUsers(response.data.items);
-            });
+        this.props.getUsers(pageNumber, this.props.pageSize);
     };
+
     render() {
         return (
             <>
@@ -47,7 +32,9 @@ class UsersAPIContainer extends React.Component {
                     pageSize={this.props.pageSize}
                     currentPage={this.props.currentPage}
                     users={this.props.users}
-                    toggleFollow={this.props.toggleFollow}
+                    isFollowing={this.props.isFollowing}
+                    follow={this.props.follow}
+                    unfollow={this.props.unfollow}
                 />
             </>
         );
@@ -60,35 +47,18 @@ let mapStateToProps = (state) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         pageSize: state.usersPage.pageSize,
         currentPage: state.usersPage.currentPage,
+        isFollowing: state.usersPage.isFollowing,
         isFetching: state.usersPage.isFetching,
     };
 };
 
-// let mapDispatchToProps = (dispatch) => {
-//     return {
-//         toggleFollow: (userId) => {
-//             dispatch(toggleFollowAC(userId));
-//         },
-
-//         setUsers: (users) => {
-//             dispatch(setUsersAC(users));
-//         },
-//         changePage: (pageNumber) => {
-//             dispatch(changePageAC(pageNumber));
-//         },
-//         setTotalUsersCount: (count) => {
-//             dispatch(setTotalUsersCountAC(count));
-//         },
-//         toggleLoader: (isLoading) => {
-//             dispatch(toggleLoaderAC(isLoading));
-//         },
-//     };
-// };
-
-export default connect(mapStateToProps, {
-    toggleFollow,
-    setUsers,
-    changePage,
-    setTotalUsersCount,
-    toggleLoader,
-})(UsersAPIContainer);
+export default compose(
+    connect(mapStateToProps, {
+        toggleFollow,
+        changePage,
+        getUsers,
+        follow,
+        unfollow,
+    }),
+    withAuthRedirect
+)(UsersAPIContainer);

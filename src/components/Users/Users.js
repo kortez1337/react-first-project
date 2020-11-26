@@ -2,6 +2,8 @@ import React from "react";
 import s from "../Users/Users.module.css";
 import defaultUserImg from "../../assets/img/defaultUserImg.png";
 import { NavLink } from "react-router-dom";
+import * as axios from "axios";
+import { usersAPI } from "../../api/api";
 
 let Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -51,8 +53,15 @@ let Users = (props) => {
                                 </NavLink>
                                 <div className={s.follow_btn}>
                                     <button
+                                        disabled={props.isFollowing.some(
+                                            (id) => id === u.id
+                                        )}
                                         onClick={() => {
-                                            props.toggleFollow(u.id);
+                                            if (u.followed) {
+                                                props.unfollow(u.id);
+                                            } else if (!u.followed) {
+                                                props.follow(u.id);
+                                            }
                                         }}
                                     >
                                         {u.followed ? "Unfollow" : "Follow"}

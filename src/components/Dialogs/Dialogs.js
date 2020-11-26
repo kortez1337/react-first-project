@@ -2,6 +2,8 @@ import React from "react";
 import s from "../Dialogs/Dialogs.module.css";
 import DialogItem from "../Dialogs/DialogItem/DialogItem";
 import Message from "../Dialogs/Message/Message";
+import { Redirect } from "react-router-dom";
+import SendMessage from "./SendMessage/SendMessage";
 
 const Dialogs = (props) => {
     let dialogsItemsElements = props.dialogs.map((el) => {
@@ -12,15 +14,8 @@ const Dialogs = (props) => {
         return <Message id={el.id} message={el.message} />;
     });
 
-    let sendMessageElement = React.createRef();
-
-    let sendMessage = () => {
-        props.sendMessage();
-    };
-
-    let changeMessageText = () => {
-        let text = sendMessageElement.current.value;
-        props.changeMessageText(text);
+    let sendMessage = (formData) => {
+        props.sendMessage(formData.messageText);
     };
 
     return (
@@ -31,18 +26,7 @@ const Dialogs = (props) => {
             </div>
             <div className={s.messages_wrapper}>
                 <div className={s.messages}>{messageElements}</div>
-                <div className={s.send}>
-                    <div className={s.send_text}>
-                        <textarea
-                            ref={sendMessageElement}
-                            value={props.messageNewText}
-                            onChange={changeMessageText}
-                        ></textarea>
-                    </div>
-                    <div className={s.send_btn}>
-                        <button onClick={sendMessage}>Отправить</button>
-                    </div>
-                </div>
+                <SendMessage onSubmit={sendMessage} />
             </div>
         </div>
     );

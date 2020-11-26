@@ -26,7 +26,7 @@ const dialogsReducer = (state = initialState, action) => {
         case ADD_MESSAGE:
             let newMessage = {
                 id: 6,
-                message: state.messageNewText,
+                message: action.messageText,
             };
             return {
                 ...state,
@@ -45,7 +45,10 @@ const dialogsReducer = (state = initialState, action) => {
     }
 };
 
-export const addMessageActionCreator = () => ({ type: ADD_MESSAGE });
+export const addMessageActionCreator = (messageText) => ({
+    type: ADD_MESSAGE,
+    messageText,
+});
 export const updateMessageTextActionCreator = (text) => ({
     type: UPDATE_MESSAGE_TEXT,
     newText: text,

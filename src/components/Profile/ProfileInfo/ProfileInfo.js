@@ -2,9 +2,9 @@ import React from "react";
 import s from "../ProfileInfo/ProfileInfo.module.css";
 import profileHeaderImg from "../../../assets/img/user-img.jpg";
 import Preloader from "../../common/Preloader/Preloader";
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 const ProfileInfo = (props) => {
-    console.log(props);
     if (!props.profile) {
         return <Preloader />;
     }
@@ -22,6 +22,10 @@ const ProfileInfo = (props) => {
                 </div>
                 <div className={s.right_side}>
                     <div className={s.fullname}>{props.profile.fullName}</div>
+                    <ProfileStatus
+                        status={props.status}
+                        updateUserStatus={props.updateUserStatus}
+                    />
                     {props.profile.lookingForAJob ? (
                         <div className={s.find_job}>
                             В поиске работы
