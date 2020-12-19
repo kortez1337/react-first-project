@@ -5,6 +5,7 @@
     padding: 20px;
     display: flex;
 }
+
 .right_side {
     margin-left: 50px;
 }
@@ -12,5 +13,8 @@
     font-size: 20px;
 }
 .find_job {
-    margin-top: 200px;
+    /* margin-top: 200px; */
+}
+.avatar img {
+    max-width: 200px;
 }

@@ -1,10 +1,14 @@
+import { stopSubmit } from "redux-form";
 import { profileAPI } from "../api/api";
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
 const SET_USER_STATUS = "SET-USER-STATUS";
+const UPDATE_AVATAR = "UPDATE-AVATAR";
+const UPDATE_PROFILE_DATA = "PROFILE-UPDATE-DATA";
 
 let initialState = {
+    userImg: "",
     posts: [
         { id: 1, message: "My first post", like: 2 },
         { id: 2, message: "My second post", like: 0 },
@@ -44,6 +48,18 @@ const profileReducer = (state = initialState, action) => {
                 status: action.statusText,
             };
         }
+        case UPDATE_AVATAR: {
+            return {
+                ...state,
+                profile: { ...state.profile, photos: action.newPhotos },
+            };
+        }
+        case UPDATE_PROFILE_DATA: {
+            return {
+                ...state,
+                profile: { ...state.profile, ...action.profile },
+            };
+        }
 
         default:
             return state;
@@ -53,6 +69,10 @@ const profileReducer = (state = initialState, action) => {
 export const setUserProfile = (profile) => ({
     type: SET_USER_PROFILE,
     profile,
+});
+export const updateAvatar = (newPhotos) => ({
+    type: UPDATE_AVATAR,
+    newPhotos,
 });
 export const setUserStatus = (statusText) => ({
     type: SET_USER_STATUS,
@@ -88,6 +108,37 @@ export const updateUserStatus = (statusText) => {
                 dispatch(setUserStatus(statusText));
             }
         });
+    };
+};
+export const updateUserAvatar = (userAvatar) => {
+    return (dispatch) => {
+        profileAPI.updateAvatar(userAvatar).then((data) => {
+            if (data.resultCode === 0) {
+                dispatch(updateAvatar(data.data.photos));
+            }
+        });
+    };
+};
+
+const updateProfileDataSuccess = (profile) => ({
+    type: UPDATE_PROFILE_DATA,
+    profile,
+});
+
+export const updateProfileData = (profile) => {
+    return async (dispatch) => {
+        let data = await profileAPI.updateProfileData(profile);
+
+        if (data.resultCode === 0) {
+            dispatch(updateProfileDataSuccess(profile));
+        } else {
+            dispatch(
+                stopSubmit("editProfileData", {
+                    _error: data.messages[0],
+                })
+            );
+            return Promise.reject(data.messages[0]);
+        }
     };
 };
 

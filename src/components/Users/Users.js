@@ -2,8 +2,7 @@ import React from "react";
 import s from "../Users/Users.module.css";
 import defaultUserImg from "../../assets/img/defaultUserImg.png";
 import { NavLink } from "react-router-dom";
-import * as axios from "axios";
-import { usersAPI } from "../../api/api";
+import ReactPaginate from "react-paginate";
 
 let Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -16,7 +15,7 @@ let Users = (props) => {
 
     return (
         <div className={s.wrapper}>
-            <div className={s.pagination}>
+            {/* <div className={s.pagination}>
                 {pages.map((p) => {
                     return (
                         <div
@@ -33,7 +32,22 @@ let Users = (props) => {
                         </div>
                     );
                 })}
-            </div>
+            </div> */}
+            <ReactPaginate
+                previousLabel={"<--"}
+                nextLabel={"-->"}
+                breakLabel={"-"}
+                breakClassName={"break-me"}
+                pageCount={pagesCount}
+                containerClassName={s.pagination}
+                subContainerClassName={s.pagination_item}
+                activeClassName={s.pagination_item__active}
+                pageRangeDisplayed={2}
+                forcePage={props.currentPage - 1}
+                onPageChange={(data) => {
+                    props.onPageChanged(data.selected + 1);
+                }}
+            />
             <div className={s.all_users}>
                 {props.users.map((u) => {
                     return (

@@ -45,6 +45,26 @@ export const profileAPI = {
                 return responce.data;
             });
     },
+    updateAvatar: (file) => {
+        const formData = new FormData();
+
+        formData.append("image", file);
+
+        return instance
+            .put("profile/photo", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            })
+            .then((responce) => {
+                return responce.data;
+            });
+    },
+    updateProfileData: (profile) => {
+        return instance.put("/profile", profile).then((responce) => {
+            return responce.data;
+        });
+    },
 };
 
 export const authAPI = {
@@ -53,9 +73,10 @@ export const authAPI = {
             return response.data;
         });
     },
-    login(email, password, rememberMe) {
+    login(email, password, rememberMe, captcha) {
+        debugger;
         return instance
-            .post("auth/login", { email, password, rememberMe })
+            .post("auth/login", { email, password, rememberMe, captcha })
             .then((response) => {
                 return response.data;
             });
@@ -63,6 +84,14 @@ export const authAPI = {
     logout() {
         return instance.delete("auth/login").then((response) => {
             return response.data;
+        });
+    },
+};
+
+export const securityAPI = {
+    getCaptchaURL: () => {
+        return instance.get("security/get-captcha-url").then((responce) => {
+            return responce.data;
         });
     },
 };

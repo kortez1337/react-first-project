@@ -82,7 +82,7 @@ export const setTotalUsersCount = (count) => ({
     count,
 });
 
-export const getUsers = (currentPage, pageSize) => {
+export const requestUsers = (currentPage, pageSize) => {
     return (dispatch) => {
         dispatch(toggleLoader(true));
 

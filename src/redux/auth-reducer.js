@@ -1,6 +1,8 @@
 import { stopSubmit } from "redux-form";
-import { authAPI } from "../api/api";
+import { authAPI, securityAPI } from "../api/api";
+
 const SET_USER_DATA = "SET-USER-DATA";
+const SET_CAPTCHA_URL = "SET-CAPTCHA-URL";
 
 let initialState = {
     userId: null,
@@ -8,6 +10,7 @@ let initialState = {
     email: null,
     isAuth: false,
     isLoading: false,
+    captchaURL: null,
 };
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -17,6 +20,12 @@ const authReducer = (state = initialState, action) => {
                 ...action.userData,
                 isAuth: action.isAuth,
             };
+        case SET_CAPTCHA_URL: {
+            return {
+                ...state,
+                captchaURL: action.url,
+            };
+        }
         default:
             return state;
     }
@@ -39,19 +48,24 @@ export const auth = () => {
     };
 };
 
-export const login = (email, password, rememberMe) => {
+export const login = (email, password, rememberMe, loginCaptcha) => {
     return (dispatch) => {
-        authAPI.login(email, password, rememberMe).then((data) => {
-            if (data.resultCode === 0) {
-                dispatch(auth());
-            } else {
-                dispatch(
-                    stopSubmit("login", {
-                        _error: data.messages,
-                    })
-                );
-            }
-        });
+        authAPI
+            .login(email, password, rememberMe, loginCaptcha)
+            .then((data) => {
+                if (data.resultCode === 0) {
+                    dispatch(auth());
+                } else {
+                    if (data.resultCode === 10) {
+                        dispatch(getCaptchaURL());
+                    }
+                    dispatch(
+                        stopSubmit("login", {
+                            _error: data.messages,
+                        })
+                    );
+                }
+            });
     };
 };
 export const logout = () => {
@@ -62,6 +76,14 @@ export const logout = () => {
             }
         });
     };
+};
+
+const setCaptchaURL = (url) => ({ type: SET_CAPTCHA_URL, url });
+
+export const getCaptchaURL = () => (dispatch) => {
+    securityAPI.getCaptchaURL().then((data) => {
+        dispatch(setCaptchaURL(data.url));
+    });
 };
 
 export default authReducer;

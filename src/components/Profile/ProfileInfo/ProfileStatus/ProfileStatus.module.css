@@ -1,0 +1,7 @@
+.status_text {
+    background: cyan;
+    padding: 5px 10px;
+    display: inline-block;
+    margin: 5px 0;
+    cursor: pointer;
+}

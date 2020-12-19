@@ -3,9 +3,17 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import {
+    getUsers,
+    getCurrentPage,
+    getIsFetching,
+    getIsFollowing,
+    getPageSize,
+    getTotalUsersCount,
+} from "../../redux/selectors/users-selector";
+import {
     changePage,
     toggleFollow,
-    getUsers,
+    requestUsers,
     follow,
     unfollow,
 } from "../../redux/users-reducer";
@@ -14,15 +22,17 @@ import Users from "../Users/Users";
 
 class UsersAPIContainer extends React.Component {
     componentDidMount = () => {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize);
+        this.props.requestUsers(this.props.currentPage, this.props.pageSize);
     };
 
     onPageChanged = (pageNumber) => {
         this.props.changePage(pageNumber);
-        this.props.getUsers(pageNumber, this.props.pageSize);
+        this.props.requestUsers(pageNumber, this.props.pageSize);
     };
 
     render() {
+        console.log("USERS RENDER");
+
         return (
             <>
                 {this.props.isFetching ? <Preloader /> : null}
@@ -43,12 +53,12 @@ class UsersAPIContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        pageSize: state.usersPage.pageSize,
-        currentPage: state.usersPage.currentPage,
-        isFollowing: state.usersPage.isFollowing,
-        isFetching: state.usersPage.isFetching,
+        users: getUsers(state),
+        totalUsersCount: getTotalUsersCount(state),
+        pageSize: getPageSize(state),
+        currentPage: getCurrentPage(state),
+        isFollowing: getIsFollowing(state),
+        isFetching: getIsFetching(state),
     };
 };
 
@@ -56,7 +66,7 @@ export default compose(
     connect(mapStateToProps, {
         toggleFollow,
         changePage,
-        getUsers,
+        requestUsers,
         follow,
         unfollow,
     }),

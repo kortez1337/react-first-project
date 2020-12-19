@@ -48,15 +48,35 @@
 .pagination {
     display: flex;
     justify-content: space-between;
-    max-width: 200px;
+
     width: 100%;
     margin: 0 auto 30px auto;
+    padding: 0;
+}
+.pagination li {
+    margin-left: 5px;
+    outline: none;
+    list-style-type: none;
+    max-width: 56px;
+    width: 100%;
+}
+.pagination li a {
+    outline: none;
+    padding: 5px 10px;
+    background: #dedede;
+    outline: none;
+    cursor: pointer;
+    max-width: 100%;
+    width: 100%;
+    display: block;
+    text-align: center;
 }
 .pagination_item {
     background: #dedede;
     padding: 5px 10px;
     cursor: pointer;
 }
-.pagination_item__active {
+.pagination li.pagination_item__active a {
     background: red;
+    outline: none;
 }

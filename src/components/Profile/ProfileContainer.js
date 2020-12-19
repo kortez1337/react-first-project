@@ -1,5 +1,4 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 
 import Profile from "../Profile/Profile";
 import { connect } from "react-redux";
@@ -22,7 +21,8 @@ class ProfileContainer extends React.Component {
         this.props.getUserStatus(userId);
     }
     render() {
-        return <Profile {...this.props} profile={this.props.profile} />;
+        console.log("PROFILE RENDER");
+        return <Profile {...this.props} />;
     }
 }
 
